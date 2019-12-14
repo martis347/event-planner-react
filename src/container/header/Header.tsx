@@ -15,14 +15,21 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledUsername = styled.div`
-  color: white;
-  display: flex;
-  align-items: center;
-  padding-right: 12px;
+  & {
+    display: flex;
+    align-items: center;
+    padding-right: 12px;
 
-  svg {
-    width: 13px;
-    padding-right: 6px;
+    span {
+      color: white;
+    }
+    svg {
+      path {
+        color: white;
+      }
+      width: 13px;
+      padding-right: 6px;
+    }
   }
 `;
 

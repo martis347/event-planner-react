@@ -7,14 +7,21 @@ const StyledWrapper = styled.div`
 
 const StyledHeader = styled.div`
   font-weight: 500;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 `;
 
 const StyledItem = styled.div`
-  margin: 8px 0;
+  margin: 10px 0;
   display: flex;
   justify-content: space-between;
+  padding: 6px;
+  margin: 0 -6px;
+  background-color: transparent;
+  transition: 0.1s all;
 
+  :hover {
+    background-color: rgba(32, 33, 36, 0.039);
+  }
   span {
     font-size: 13px;
     color: gray;
