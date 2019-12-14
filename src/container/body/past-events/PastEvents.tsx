@@ -3,6 +3,12 @@ import styled from "styled-components";
 import { EventData, EventVars, PAST_EVENTS } from "../past-events/query";
 import { useQuery } from "@apollo/react-hooks";
 import EventRating from "./EventRating";
+import { Event } from "models";
+import { Loader } from "global-components";
+
+interface OwnProps {
+  onEventClick: (event: Event) => void;
+}
 
 const StyledWrapper = styled.div`
   height: 220px;
@@ -33,8 +39,8 @@ const StyledItem = styled.div`
 `;
 
 const today = new Date();
-const PastEvents = () => {
-  const { data } = useQuery<EventData, EventVars>(PAST_EVENTS, {
+const PastEvents = ({ onEventClick }: OwnProps) => {
+  const { data, loading } = useQuery<EventData, EventVars>(PAST_EVENTS, {
     variables: {
       to: today
     }
@@ -43,18 +49,18 @@ const PastEvents = () => {
   const events = useMemo(
     () =>
       data?.events.map(e => (
-        <StyledItem key={e.id}>
+        <StyledItem key={e.id} onClick={() => onEventClick(e)}>
           {e.name}
           <EventRating ratings={e.ratings} />
         </StyledItem>
       )),
-    [data]
+    [data, onEventClick]
   );
 
   return (
     <StyledWrapper>
       <StyledHeader>Past events</StyledHeader>
-      {events}
+      {loading ? <Loader /> : events}
     </StyledWrapper>
   );
 };

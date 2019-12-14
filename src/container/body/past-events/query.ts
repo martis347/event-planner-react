@@ -2,11 +2,14 @@ import gql from "graphql-tag";
 import { Event } from "models";
 
 export const PAST_EVENTS = gql`
-  query getPastEvenets($to: DateTime!) {
-    events(to: $to) {
+  query pastEvents($to: DateTime!) {
+    events(to: $to, limit: 5) {
       id
       name
       startTime
+      description
+      endTime
+      location
       ratings {
         rating
       }

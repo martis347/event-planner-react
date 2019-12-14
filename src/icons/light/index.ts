@@ -1,3 +1,3 @@
-import { ReactComponent as User } from "./user.svg";
+import { ReactComponent as Times } from "./times.svg";
 
-export { User };
+export { Times };

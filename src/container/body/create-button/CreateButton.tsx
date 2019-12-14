@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { CalendarPlus } from "icons/regular";
 
+interface OwnProps {
+  onClick?: () => void;
+}
+
 const StyledButton = styled.button`
   height: 48px;
   width: 150px;
@@ -38,9 +42,9 @@ const StyledButton = styled.button`
   }
 `;
 
-const CreateButton = () => {
+const CreateButton = ({ onClick }: OwnProps) => {
   return (
-    <StyledButton>
+    <StyledButton onClick={onClick}>
       <CalendarPlus />
       Create
     </StyledButton>

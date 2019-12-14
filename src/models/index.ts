@@ -3,7 +3,7 @@ export interface Event {
   name: string;
   description: string;
   location: string;
-  startTime: string;
+  startTime?: string;
   endTime?: string;
   canBeRated: boolean;
   ratings: EventRating[];

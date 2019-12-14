@@ -2,11 +2,14 @@ import gql from "graphql-tag";
 import { Event } from "models";
 
 export const UPCOMING_EVENTS = gql`
-  query getUpcomingEvenets($from: DateTime!) {
-    events(from: $from) {
+  query upcomingEvents($from: DateTime!) {
+    events(from: $from, limit: 5) {
       id
       name
       startTime
+      description
+      endTime
+      location
     }
   }
 `;

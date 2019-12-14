@@ -1,12 +1,18 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { useQuery } from "@apollo/react-hooks";
+import { Loader } from "global-components";
 import { UPCOMING_EVENTS, EventVars, EventData } from "./query";
 import {
   differenceInCalendarMonths,
   parseISO,
   differenceInCalendarDays
 } from "date-fns";
+import { Event } from "models";
+
+interface OwnProps {
+  onEventClick: (event: Event) => void;
+}
 
 const StyledWrapper = styled.div`
   height: 220px;
@@ -53,8 +59,8 @@ const getTimeLeft = (date: string) => {
   return `${daysLeft} day${daysLeft > 1 ? "s" : ""}`;
 };
 
-const UpcomingEvents = () => {
-  const { data } = useQuery<EventData, EventVars>(UPCOMING_EVENTS, {
+const UpcomingEvents = ({ onEventClick }: OwnProps) => {
+  const { data, loading } = useQuery<EventData, EventVars>(UPCOMING_EVENTS, {
     variables: {
       from: today
     }
@@ -63,17 +69,17 @@ const UpcomingEvents = () => {
   const events = useMemo(
     () =>
       data?.events.map(e => (
-        <StyledItem key={e.id}>
-          {e.name} <span>in {getTimeLeft(e.startTime)}</span>
+        <StyledItem key={e.id} onClick={() => onEventClick(e)}>
+          {e.name} <span>in {getTimeLeft(e.startTime!)}</span>
         </StyledItem>
       )),
-    [data]
+    [data, onEventClick]
   );
 
   return (
     <StyledWrapper>
       <StyledHeader>Upcoming events</StyledHeader>
-      {events}
+      {loading ? <Loader /> : events}
     </StyledWrapper>
   );
 };
