@@ -54,6 +54,7 @@ const FullCalendar = () => {
         <DaysTextsRow />
         {mondays.map((monday, index) => (
           <Row
+            key={monday.toISOString()}
             startOfWeek={monday}
             currentMonth={currentMonth}
             firstRow={index === 0}

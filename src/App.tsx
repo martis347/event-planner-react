@@ -1,6 +1,8 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
+import { ApolloProvider } from "@apollo/react-hooks";
 import Container from "./container/Container";
+import apolloClient from "./apollo";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -10,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  * {
+  span, div, button {
     font-family: 'Google Sans', sans-serif;
     font-weight: 400;
     color: #3c4043;
@@ -27,10 +29,10 @@ const GlobalStyle = createGlobalStyle`
 
 const App = () => {
   return (
-    <>
+    <ApolloProvider client={apolloClient}>
       <GlobalStyle />
       <Container />
-    </>
+    </ApolloProvider>
   );
 };
 
