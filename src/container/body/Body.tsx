@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import CreateButton from "./create-button/CreateButton";
 import UpcomingEvents from "./upcoming-events/UpcomingEvents";
 import PastEvents from "./past-events/PastEvents";
@@ -6,6 +6,8 @@ import FullCalendar from "./full-calendar/FullCalendar";
 import styled from "styled-components";
 import Drawer from "./drawer/Drawer";
 import { Event } from "models";
+import { ALL_EVENTS, AllEventsData } from "./query";
+import { useQuery } from "@apollo/react-hooks";
 import { useMutation } from "@apollo/react-hooks";
 import {
   EventCreateVars,
@@ -36,6 +38,8 @@ const RightSideWrapper = styled.div`
 `;
 
 const Body = () => {
+  const { data } = useQuery<AllEventsData>(ALL_EVENTS);
+
   const [createEvent, { loading: saving }] = useMutation<
     Event,
     EventCreateVars
@@ -53,6 +57,7 @@ const Body = () => {
     saving,
     updating
   ]);
+  const events = useMemo(() => data?.events ?? [], [data]);
 
   const [modifiedEvent, setModifiedEvent] = useState<Event | undefined>();
   const handleCreate = useCallback((initialDate?: Date) => {
@@ -68,7 +73,17 @@ const Body = () => {
     });
   }, []);
 
-  const handleClose = useCallback(() => setModifiedEvent(undefined), []);
+  const handleEdit = useCallback((event?: Event) => {
+    setModifiedEvent(event);
+    const newurl =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname +
+      (event ? `?event=${event.id}` : "");
+    window.history.pushState({ path: newurl }, "", newurl);
+  }, []);
+  const handleClose = useCallback(() => handleEdit(undefined), [handleEdit]);
 
   const handleDelete = useCallback(
     async (eventId: string) => {
@@ -82,10 +97,10 @@ const Body = () => {
       if (result.errors?.length) {
         console.log("error");
       } else {
-        setModifiedEvent(undefined);
+        handleEdit(undefined);
       }
     },
-    [deleteEvent]
+    [deleteEvent, handleEdit]
   );
 
   const handleSave = useCallback(
@@ -123,23 +138,34 @@ const Body = () => {
       if (result.errors?.length) {
         console.log("error");
       } else {
-        setModifiedEvent(undefined);
+        handleEdit(undefined);
       }
     },
-    [createEvent, updateEvent]
+    [createEvent, handleEdit, updateEvent]
   );
+
+  useEffect(() => {
+    if (events.length > 0) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const eventId = urlParams.get("event");
+      const event = events.find(e => e.id === eventId)!;
+
+      handleEdit(event);
+    }
+  }, [events, handleEdit]);
 
   return (
     <>
       <BodyWrapper>
         <LeftSideWrapper>
           <CreateButton onClick={handleCreate} />
-          <UpcomingEvents onEventClick={setModifiedEvent} />
-          <PastEvents onEventClick={setModifiedEvent} />
+          <UpcomingEvents onEventClick={handleEdit} />
+          <PastEvents onEventClick={handleEdit} />
         </LeftSideWrapper>
         <RightSideWrapper>
           <FullCalendar
-            onEventEdit={setModifiedEvent}
+            events={events}
+            onEventEdit={handleEdit}
             onEventCreate={handleCreate}
           />
         </RightSideWrapper>

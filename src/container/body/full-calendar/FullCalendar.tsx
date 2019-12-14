@@ -5,11 +5,10 @@ import { addDays, addWeeks } from "date-fns/esm";
 import Row from "./Row";
 import DaysTextsRow from "./DaysTextsRow";
 import CalendarNavigation from "./CalendarNavigation";
-import { ALL_EVENTS, AllEventsData } from "./query";
-import { useQuery } from "@apollo/react-hooks";
 import { Event } from "models";
 
 interface OwnProps {
+  events: Event[];
   onEventCreate: (date: Date) => void;
   onEventEdit: (event: Event) => void;
 }
@@ -22,9 +21,7 @@ const CalendarWrapper = styled.div`
 `;
 
 const daysToNegate = [6, 0, 1, 2, 3, 4, 5];
-const FullCalendar = ({ onEventEdit, onEventCreate }: OwnProps) => {
-  const { data } = useQuery<AllEventsData>(ALL_EVENTS);
-
+const FullCalendar = ({ onEventEdit, onEventCreate, events }: OwnProps) => {
   const [selectedDate, setSelectedDate] = useState(startOfMonth(new Date()));
   const currentMonth = useMemo(() => getMonth(selectedDate), [selectedDate]);
   const firstMonday = useMemo(() => {
@@ -33,7 +30,6 @@ const FullCalendar = ({ onEventEdit, onEventCreate }: OwnProps) => {
     return result;
   }, [selectedDate]);
 
-  const events = useMemo(() => data?.events ?? [], [data]);
   const mondays = useMemo(() => {
     const result: Date[] = [firstMonday];
     let currentMonday = addWeeks(firstMonday, 1);
