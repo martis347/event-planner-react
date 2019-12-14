@@ -1,12 +1,14 @@
 import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { ApolloProvider } from "@apollo/react-hooks";
 import DateFnsUtils from "@date-io/date-fns";
 import locale from "date-fns/locale/en-GB";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { createMuiTheme } from "@material-ui/core/styles";
 import Container from "./container/Container";
-import apolloClient from "./apollo";
+import {
+  AuthenticationContext,
+  useAuthenticationContext
+} from "context/AuthenticationContext";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -16,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  span, div, button, input, textarea, p {
+  span, div, button, input, textarea, p, label {
     font-family: 'Google Sans', sans-serif !important;
     font-weight: 400;
     color: #3c4043;
@@ -56,15 +58,17 @@ const theme = createMuiTheme({
 });
 
 const App = () => {
+  const data = useAuthenticationContext();
+
   return (
-    <ThemeProvider theme={theme}>
-      <MuiPickersUtilsProvider utils={DateFnsUtils} locale={locale}>
-        <ApolloProvider client={apolloClient}>
+    <AuthenticationContext.Provider value={data}>
+      <ThemeProvider theme={theme}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils} locale={locale}>
           <GlobalStyle />
           <Container />
-        </ApolloProvider>
-      </MuiPickersUtilsProvider>
-    </ThemeProvider>
+        </MuiPickersUtilsProvider>
+      </ThemeProvider>
+    </AuthenticationContext.Provider>
   );
 };
 

@@ -7,6 +7,7 @@ import { ReactComponent as MapMarker } from "./map-marker.svg";
 import { ReactComponent as AlignLeft } from "./align-left.svg";
 import { ReactComponent as Clock } from "./clock.svg";
 import { ReactComponent as Text } from "./text.svg";
+import { ReactComponent as SignOut } from "./sign-out.svg";
 
 export {
   User,
@@ -17,5 +18,6 @@ export {
   MapMarker,
   AlignLeft,
   Clock,
+  SignOut,
   Text
 };

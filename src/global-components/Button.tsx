@@ -2,11 +2,11 @@ import React, { useCallback } from "react";
 import styled from "styled-components";
 
 interface OwnProps {
-  children: string;
+  children: React.ReactNode;
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;
-  onClick: () => void;
+  onClick: (event: React.MouseEvent) => void;
 }
 
 const StyledButton = styled.button<{ isDisabled?: number }>`
@@ -46,11 +46,14 @@ const Button = ({
   className,
   onClick
 }: OwnProps) => {
-  const handleClick = useCallback(() => {
-    if (!disabled) {
-      onClick();
-    }
-  }, [disabled, onClick]);
+  const handleClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (!disabled) {
+        onClick(e);
+      }
+    },
+    [disabled, onClick]
+  );
 
   return (
     <StyledButton

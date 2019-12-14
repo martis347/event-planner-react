@@ -26,7 +26,7 @@ const BodyWrapper = styled.div`
 const LeftSideWrapper = styled(PerfectScrollbar)`
   min-width: 250px;
   height: 100%;
-  padding: 0 12px;
+  padding: 12px;
   overflow-y: auto;
 `;
 
@@ -55,13 +55,13 @@ const Body = () => {
   ]);
 
   const [modifiedEvent, setModifiedEvent] = useState<Event | undefined>();
-  const handleCreate = useCallback(() => {
+  const handleCreate = useCallback((initialDate?: Date) => {
     setModifiedEvent({
       description: "",
       id: "",
       location: "",
       name: "",
-      startTime: undefined,
+      startTime: initialDate?.toISOString() ?? undefined,
       endTime: undefined,
       canBeRated: false,
       ratings: []
@@ -138,7 +138,10 @@ const Body = () => {
           <PastEvents onEventClick={setModifiedEvent} />
         </LeftSideWrapper>
         <RightSideWrapper>
-          <FullCalendar />
+          <FullCalendar
+            onEventEdit={setModifiedEvent}
+            onEventCreate={handleCreate}
+          />
         </RightSideWrapper>
       </BodyWrapper>
       <Drawer

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 interface OwnProps {
   autofocus?: boolean;
+  disabled?: boolean;
   rows?: number;
   icon?: React.ReactElement;
   placeholder?: string;
@@ -29,17 +30,27 @@ const StyledArea = styled.textarea`
   width: 100%;
   font-size: 16px;
 
-  &:hover {
+  &:hover:not(:disabled) {
     border-bottom: 2px solid #c4c4c5;
   }
 
   &:focus {
     border-bottom: 2px solid #4260cc;
   }
+
+  &:disabled {
+    background: transparent;
+    color: rgba(0, 0, 0, 0.38);
+    ::placeholder {
+      color: rgba(0, 0, 0, 0.38);
+    }
+  }
 `;
 
 const TextArea = ({
   value,
+  disabled,
+  autofocus,
   placeholder,
   icon,
   rows = 1,
@@ -57,6 +68,8 @@ const TextArea = ({
     <InputWrapper>
       {icon}
       <StyledArea
+        disabled={disabled}
+        autoFocus={autofocus}
         rows={rows}
         placeholder={placeholder}
         value={value}

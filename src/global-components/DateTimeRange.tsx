@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { isValid } from "date-fns";
 
 interface OwnProps {
+  disabled?: boolean;
   icon?: React.ReactElement;
   fromDate: Date | null;
   toDate: Date | null;
@@ -40,6 +41,7 @@ const InputWrapper = styled.span`
 `;
 
 const DateTimeRange = ({
+  disabled,
   fromDate,
   icon,
   toDate,
@@ -68,6 +70,7 @@ const DateTimeRange = ({
     <InputWrapper>
       {icon}
       <KeyboardDateTimePicker
+        disabled={disabled}
         autoOk
         label="From"
         value={fromDate}
@@ -79,6 +82,7 @@ const DateTimeRange = ({
       />
       <div style={{ width: 20 }} />
       <KeyboardDateTimePicker
+        disabled={disabled}
         autoOk
         label="To"
         value={toDate}

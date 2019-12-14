@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { CalendarPlus } from "icons/regular";
+import { AuthenticationContext } from "context/AuthenticationContext";
 
 interface OwnProps {
   onClick?: () => void;
@@ -12,7 +13,8 @@ const StyledButton = styled.button`
   background: none;
   border: none;
   color: #3c4043;
-  margin: 16px 0;
+  margin-top: 4px;
+  margin-bottom: 16px;
   border-radius: 30px;
   display: flex;
   align-items: center;
@@ -43,12 +45,18 @@ const StyledButton = styled.button`
 `;
 
 const CreateButton = ({ onClick }: OwnProps) => {
-  return (
-    <StyledButton onClick={onClick}>
-      <CalendarPlus />
-      Create
-    </StyledButton>
-  );
+  const { showAdminContent } = useContext(AuthenticationContext);
+
+  if (showAdminContent) {
+    return (
+      <StyledButton onClick={onClick}>
+        <CalendarPlus />
+        Create
+      </StyledButton>
+    );
+  }
+
+  return null;
 };
 
 export default CreateButton;

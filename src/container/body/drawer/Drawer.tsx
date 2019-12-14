@@ -1,16 +1,17 @@
-import React, { useState, useCallback, useMemo, useEffect } from "react";
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+  useContext
+} from "react";
 import styled from "styled-components";
-import {
-  InputLarge,
-  Input,
-  TextArea,
-  DateTimeRange,
-  Button
-} from "global-components";
+import { Input, TextArea, DateTimeRange, Button } from "global-components";
 import { MapMarker, AlignLeft, Clock, Text } from "icons/regular";
 import DrawerHeader from "./DrawerHeader";
 import { parseISO } from "date-fns";
 import { Event } from "models";
+import { AuthenticationContext } from "context/AuthenticationContext";
 
 interface OwnProps {
   event?: Event;
@@ -80,10 +81,18 @@ const Drawer = ({
     event?.endTime ? parseISO(event.endTime) : null
   );
 
-  const title = useMemo(
-    () => (event?.id ? "Modify an event" : "Create an event"),
-    [event]
-  );
+  const { showAdminContent } = useContext(AuthenticationContext);
+  const title = useMemo(() => {
+    if (showAdminContent) {
+      if (event?.id) {
+        return "Modify an event";
+      }
+      return "Create an event";
+    }
+
+    return "View an event";
+  }, [event, showAdminContent]);
+
   const saveIsDisabled = useMemo(() => {
     return hasError || !eventName || !fromDate || disableDrawerActions;
   }, [eventName, fromDate, hasError, disableDrawerActions]);
@@ -133,6 +142,32 @@ const Drawer = ({
     }
   }, [onClose, drawerVisible]);
 
+  const buttomButtons = useMemo(() => {
+    if (!showAdminContent) {
+      return null;
+    }
+
+    return (
+      <>
+        <Button disabled={saveIsDisabled} onClick={handleSave}>
+          Save
+        </Button>
+        {event?.id && (
+          <DeleteButton disabled={disableDrawerActions} onClick={handleDelete}>
+            Delete
+          </DeleteButton>
+        )}
+      </>
+    );
+  }, [
+    disableDrawerActions,
+    event,
+    handleDelete,
+    handleSave,
+    saveIsDisabled,
+    showAdminContent
+  ]);
+
   return (
     <DrawerMask visible={drawerVisible ? 1 : 0} onClick={onClose}>
       <DrawerWrapper
@@ -142,12 +177,14 @@ const Drawer = ({
         <DrawerHeader onClose={onClose}>{title}</DrawerHeader>
         <DrawerContentWrapper>
           <Input
+            disabled={!showAdminContent}
             placeholder="Event name"
             icon={<Text />}
             value={eventName}
             onChange={setEventName}
           />
           <DateTimeRange
+            disabled={!showAdminContent}
             icon={<Clock />}
             fromDate={fromDate}
             toDate={toDate}
@@ -156,29 +193,21 @@ const Drawer = ({
             onError={setHasError}
           />
           <Input
+            disabled={!showAdminContent}
             placeholder="Location"
             icon={<MapMarker style={{ paddingBottom: 3 }} />}
             value={location}
             onChange={setLocation}
           />
           <TextArea
+            disabled={!showAdminContent}
             placeholder="Description"
             rows={5}
             icon={<AlignLeft />}
             value={description}
             onChange={setDescription}
           />
-          <Button disabled={saveIsDisabled} onClick={handleSave}>
-            Save
-          </Button>
-          {event?.id && (
-            <DeleteButton
-              disabled={disableDrawerActions}
-              onClick={handleDelete}
-            >
-              Delete
-            </DeleteButton>
-          )}
+          {buttomButtons}
         </DrawerContentWrapper>
       </DrawerWrapper>
     </DrawerMask>
