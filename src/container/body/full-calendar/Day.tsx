@@ -81,7 +81,6 @@ const EventNameWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 10px;
-  display: inline;
 `;
 
 interface OwnProps {

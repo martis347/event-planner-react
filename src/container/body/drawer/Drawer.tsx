@@ -31,7 +31,7 @@ const DrawerWrapper = styled.div<{ visible: number }>`
   height: auto;
   min-height: 100%;
 
-  ${props => (props.visible ? "right: 0px;" : "right: -550px;")}
+  ${props => (props.visible ? "right: 0px;" : "right: -600px;")}
 
   @media only screen and (max-width: 600px) {
     max-width: 100%;
