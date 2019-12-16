@@ -17,7 +17,6 @@ import {
   DELETE_EVENT,
   EventDeleteVars
 } from "./drawer/query";
-import { ExecutionResult } from "apollo-boost";
 import PerfectScrollbar from "react-perfect-scrollbar";
 
 const BodyWrapper = styled.div`
@@ -66,7 +65,7 @@ const Body = () => {
     saving,
     updating
   ]);
-  const events = useMemo(() => data?.events ?? [], [data]);
+  const events = useMemo(() => data?.events || [], [data]);
 
   const [modifiedEvent, setModifiedEvent] = useState<Event | undefined>();
   const handleCreate = useCallback((initialDate?: Date) => {
@@ -75,7 +74,7 @@ const Body = () => {
       id: "",
       location: "",
       name: "",
-      startTime: initialDate?.toISOString?.() ?? undefined,
+      startTime: initialDate?.toISOString?.() || undefined,
       endTime: undefined,
       canBeRated: false,
       reviews: []
@@ -96,7 +95,7 @@ const Body = () => {
 
   const handleDelete = useCallback(
     async (eventId: string) => {
-      const result = await deleteEvent({
+      await deleteEvent({
         variables: {
           eventId
         },
@@ -110,9 +109,8 @@ const Body = () => {
 
   const handleSave = useCallback(
     async (event: Event) => {
-      let result: ExecutionResult<Event>;
       if (event.id) {
-        result = await updateEvent({
+        await updateEvent({
           variables: {
             event: {
               id: event.id,
@@ -126,7 +124,7 @@ const Body = () => {
           refetchQueries: ["upcomingEvents", "pastEvents"]
         });
       } else {
-        result = await createEvent({
+        await createEvent({
           variables: {
             event: {
               description: event.description,

@@ -28,6 +28,7 @@ const StyledItem = styled.div`
   background-color: transparent;
   transition: 0.1s all;
   cursor: pointer;
+  height: 20px;
 
   :hover {
     background-color: rgba(32, 33, 36, 0.039);

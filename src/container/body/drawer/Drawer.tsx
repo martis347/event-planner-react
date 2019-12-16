@@ -86,9 +86,9 @@ const Drawer = ({
   const { user } = useContext(AuthenticationContext);
   const [drawerVisible, setDrawerVisible] = useState(!!event);
   const [hasError, setHasError] = useState(false);
-  const [eventName, setEventName] = useState(event?.name ?? "");
-  const [location, setLocation] = useState(event?.location ?? "");
-  const [description, setDescription] = useState(event?.description ?? "");
+  const [eventName, setEventName] = useState(event?.name || "");
+  const [location, setLocation] = useState(event?.location || "");
+  const [description, setDescription] = useState(event?.description || "");
   const [fromDate, setFromDate] = useState<Date | null>(
     event?.startTime ? parseISO(event.startTime) : null
   );
@@ -134,9 +134,9 @@ const Drawer = ({
 
   useEffect(() => {
     setDrawerVisible(!!event);
-    setEventName(event?.name ?? "");
-    setLocation(event?.location ?? "");
-    setDescription(event?.description ?? "");
+    setEventName(event?.name || "");
+    setLocation(event?.location || "");
+    setDescription(event?.description || "");
     setFromDate(event?.startTime ? parseISO(event.startTime) : null);
     setToDate(event?.endTime ? parseISO(event.endTime) : null);
   }, [event]);
