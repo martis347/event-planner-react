@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.js": "/event-planner-react/static/js/main.01e5a065.chunk.js",
+    "main.js.map": "/event-planner-react/static/js/main.01e5a065.chunk.js.map",
+    "runtime-main.js": "/event-planner-react/static/js/runtime-main.058c3005.js",
+    "runtime-main.js.map": "/event-planner-react/static/js/runtime-main.058c3005.js.map",
+    "static/css/2.fa4a79a6.chunk.css": "/event-planner-react/static/css/2.fa4a79a6.chunk.css",
+    "static/js/2.4c3ab6be.chunk.js": "/event-planner-react/static/js/2.4c3ab6be.chunk.js",
+    "static/js/2.4c3ab6be.chunk.js.map": "/event-planner-react/static/js/2.4c3ab6be.chunk.js.map",
+    "index.html": "/event-planner-react/index.html",
+    "precache-manifest.193d292fe6305d9d1bf510f94a5c4f42.js": "/event-planner-react/precache-manifest.193d292fe6305d9d1bf510f94a5c4f42.js",
+    "service-worker.js": "/event-planner-react/service-worker.js",
+    "static/css/2.fa4a79a6.chunk.css.map": "/event-planner-react/static/css/2.fa4a79a6.chunk.css.map",
+    "static/js/2.4c3ab6be.chunk.js.LICENSE": "/event-planner-react/static/js/2.4c3ab6be.chunk.js.LICENSE",
+    "static/media/align-left.455c8250.svg": "/event-planner-react/static/media/align-left.455c8250.svg",
+    "static/media/calendar-plus.68a3828f.svg": "/event-planner-react/static/media/calendar-plus.68a3828f.svg",
+    "static/media/chevron-left.95a553b8.svg": "/event-planner-react/static/media/chevron-left.95a553b8.svg",
+    "static/media/chevron-right.ec6b5a47.svg": "/event-planner-react/static/media/chevron-right.ec6b5a47.svg",
+    "static/media/clock.4b95597a.svg": "/event-planner-react/static/media/clock.4b95597a.svg",
+    "static/media/map-marker.d7a5cc6a.svg": "/event-planner-react/static/media/map-marker.d7a5cc6a.svg",
+    "static/media/sign-out.b59baf01.svg": "/event-planner-react/static/media/sign-out.b59baf01.svg",
+    "static/media/star.97a3ba29.svg": "/event-planner-react/static/media/star.97a3ba29.svg",
+    "static/media/star.b0426e0a.svg": "/event-planner-react/static/media/star.b0426e0a.svg",
+    "static/media/text.df521062.svg": "/event-planner-react/static/media/text.df521062.svg",
+    "static/media/times.5579b01c.svg": "/event-planner-react/static/media/times.5579b01c.svg",
+    "static/media/user.86b7ad16.svg": "/event-planner-react/static/media/user.86b7ad16.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.058c3005.js",
+    "static/css/2.fa4a79a6.chunk.css",
+    "static/js/2.4c3ab6be.chunk.js",
+    "static/js/main.01e5a065.chunk.js"
+  ]
+}
