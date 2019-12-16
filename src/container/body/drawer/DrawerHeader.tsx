@@ -17,6 +17,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   padding: 16px;
   border-bottom: 1px solid #f1f3f4;
+  height: 26px;
   svg {
     width: 16px;
     cursor: pointer;

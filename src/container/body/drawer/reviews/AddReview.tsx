@@ -21,6 +21,7 @@ const FullStar = styled(StarFull)`
 `;
 const StarsWrapper = styled.div`
   margin-left: -4px;
+  height: 36px;
 
   svg {
     width: 24px;

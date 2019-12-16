@@ -4,6 +4,7 @@ import styled from "styled-components";
 const RowWrapper = styled.div`
   display: flex;
   height: 30px;
+  min-height: 30px;
 `;
 
 const DayWrapper = styled.div`

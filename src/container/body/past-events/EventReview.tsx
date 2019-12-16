@@ -32,6 +32,7 @@ const star = (averageValue: number, index: number) => {
           overflowX: "hidden",
           maxWidth: 14 * fraction,
           left: 0,
+          height: 14,
           top: -0.5
         }}
       >

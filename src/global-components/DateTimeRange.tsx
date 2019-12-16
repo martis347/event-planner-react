@@ -16,8 +16,10 @@ interface OwnProps {
 const InputWrapper = styled.span`
   display: flex;
   padding-top: 8px;
+  height: 56px;
   & > svg {
     min-width: 16px;
+    width: 16px;
     margin-right: 12px;
   }
 
@@ -34,6 +36,8 @@ const InputWrapper = styled.span`
   }
 
   .MuiFormControl-root {
+    min-width: 50%;
+
     svg {
       width: 18px;
       height: 18px;
@@ -84,7 +88,7 @@ const DateTimeRange = ({
         hideTabs
         onError={handleError}
       />
-      <div style={{ width: 20 }} />
+      <div style={{ width: 20, minWidth: 20 }} />
       <KeyboardDateTimePicker
         disabled={disabled}
         autoOk

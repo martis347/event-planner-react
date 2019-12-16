@@ -16,6 +16,7 @@ interface OwnProps {
 
 const InputWrapper = styled.span`
   display: flex;
+  height: 56px;
 
   svg {
     width: 16px;
@@ -30,6 +31,7 @@ const StyledInput = styled.input`
   transition: 0.4s all;
   margin: 16px 0;
   cursor: text;
+  height: 20px;
 
   width: 100%;
   font-size: 16px;

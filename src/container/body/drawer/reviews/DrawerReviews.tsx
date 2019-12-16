@@ -20,6 +20,7 @@ const DrawerReviewsWrapper = styled.div`
 const ReviewsHeader = styled.div`
   font-size: 18px;
   font-weight: 500;
+  height: 22px;
 `;
 
 const NoReviews = styled.div`

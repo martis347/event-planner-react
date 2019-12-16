@@ -38,6 +38,7 @@ const PopoverWrapper = styled.div`
 
 const StyledButton = styled(Button)`
   background: transparent;
+  display: flex;
   margin: 0;
   height: 100%;
   border-radius: 0;

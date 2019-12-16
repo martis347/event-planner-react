@@ -26,13 +26,14 @@ const StarsWrapper = styled.div`
 
   svg {
     width: 12px;
+    height: 12px;
     padding: 2px;
-    cursor: pointer;
   }
 `;
 
 const ReviewWrapper = styled.div`
   margin: 8px 0;
+  height: 40px;
 `;
 
 const SingleReview = ({ comment, rating }: OwnProps) => {
