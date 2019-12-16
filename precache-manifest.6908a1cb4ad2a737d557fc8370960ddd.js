@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "df1787c9bcaa15bc86c76aab6d6e0674",
+    "revision": "8c004c741b7bb0623f3ddb90199ecdff",
     "url": "/event-planner-react/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/event-planner-react/static/js/2.53f4c651.chunk.js.LICENSE"
   },
   {
-    "revision": "d9b5911a361afc01bb76",
-    "url": "/event-planner-react/static/js/main.bb2c746a.chunk.js"
+    "revision": "0a1c96bd3c74ca4334a6",
+    "url": "/event-planner-react/static/js/main.4594eb93.chunk.js"
   },
   {
     "revision": "77b8bd296fb3be8f9a0e",
