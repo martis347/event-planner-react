@@ -21,6 +21,7 @@ const DayWrapper = styled.div<{
   border: 1px solid lightgray;
   margin: -0.5px;
   font-size: 18px;
+  overflow: hidden;
 
   :hover {
     background: #fbfcfe;
@@ -80,6 +81,7 @@ const EventNameWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 10px;
+  display: inline;
 `;
 
 interface OwnProps {
@@ -149,7 +151,7 @@ const Day = ({ day, currentMonth, events, onClick }: OwnProps) => {
       onClick={handleClick}
     >
       <span>{format(day, "dd")}</span>
-      <EventNameWrapper>{event?.name}</EventNameWrapper>
+      <EventNameWrapper title={event?.name}>{event?.name}</EventNameWrapper>
     </DayWrapper>
   );
 };

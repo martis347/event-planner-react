@@ -10,6 +10,7 @@ interface OwnProps {
   style?: React.CSSProperties;
   className?: string;
   onEnter?: () => void;
+  onCtrlEnter?: () => void;
   onChange: (value: string) => void;
 }
 
@@ -59,7 +60,8 @@ const Input = ({
   style,
   className,
   onChange,
-  onEnter
+  onEnter,
+  onCtrlEnter
 }: OwnProps) => {
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,10 +74,12 @@ const Input = ({
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.ctrlKey && event.key === "Enter") {
+        onCtrlEnter?.();
+      } else if (event.key === "Enter") {
         onEnter?.();
       }
     },
-    [onEnter]
+    [onEnter, onCtrlEnter]
   );
 
   return (

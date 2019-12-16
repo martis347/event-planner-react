@@ -31,7 +31,12 @@ const DrawerWrapper = styled.div<{ visible: number }>`
   height: auto;
   min-height: 100%;
 
-  ${props => (props.visible ? "right: 0px;" : "right: -400px;")}
+  ${props => (props.visible ? "right: 0px;" : "right: -550px;")}
+
+  @media only screen and (max-width: 600px) {
+    max-width: 100%;
+    width: 100%;
+  }
 `;
 
 const DrawerContentWrapper = styled.div`
@@ -45,11 +50,16 @@ const DrawerMask = styled.div<{ visible: number }>`
   top: 0;
   right: 0;
   height: 100%;
+  width: 100%;
 
   ${props =>
     props.visible
-      ? "background-color: rgba(0, 0, 0, 0.45); width: 100%;"
-      : "width: 0;"}
+      ? "background-color: rgba(0, 0, 0, 0.45);"
+      : "pointer-events: none;"};
+
+  @media only screen and (max-width: 600px) {
+    background-color: transparent;
+  }
 `;
 
 const DeleteButton = styled(Button)`

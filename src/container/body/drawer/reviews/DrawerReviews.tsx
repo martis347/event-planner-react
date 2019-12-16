@@ -22,6 +22,13 @@ const ReviewsHeader = styled.div`
   font-weight: 500;
 `;
 
+const NoReviews = styled.div`
+  color: lightgray;
+  font-weight: 300;
+  font-size: 14px;
+  padding-top: 16px;
+`;
+
 const DrawerReviews = ({ eventId }: OwnProps) => {
   const { user } = useContext(AuthenticationContext);
   const { data, loading } = useQuery<
@@ -65,6 +72,10 @@ const DrawerReviews = ({ eventId }: OwnProps) => {
     return undefined;
   }, [data, user]);
 
+  const countIndicator = useMemo(
+    () => (data?.eventReviews ? `(${data?.eventReviews.length})` : ""),
+    [data]
+  );
   const content = useMemo(() => {
     if (loading) {
       return <Loader />;
@@ -77,16 +88,22 @@ const DrawerReviews = ({ eventId }: OwnProps) => {
           rating={currentUserReview?.rating}
           onSubmit={handleEventSubmit}
         />
-        {data?.eventReviews?.map?.(r => (
-          <SingleReview key={r.id} comment={r.comment} rating={r.rating} />
-        ))}
+        {data?.eventReviews?.length === 0 ? (
+          <NoReviews>
+            There are no reviews yet. Be the first to leave one!
+          </NoReviews>
+        ) : (
+          data?.eventReviews?.map?.(r => (
+            <SingleReview key={r.id} comment={r.comment} rating={r.rating} />
+          ))
+        )}
       </>
     );
   }, [currentUserReview, data, handleEventSubmit, loading]);
 
   return (
     <DrawerReviewsWrapper>
-      <ReviewsHeader>Reviews</ReviewsHeader>
+      <ReviewsHeader>Reviews {countIndicator}</ReviewsHeader>
       {content}
     </DrawerReviewsWrapper>
   );

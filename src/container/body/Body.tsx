@@ -27,13 +27,23 @@ const BodyWrapper = styled.div`
 
 const LeftSideWrapper = styled(PerfectScrollbar)`
   min-width: 250px;
+  display: flex;
+  flex-direction: column;
   height: auto;
   padding: 12px;
   overflow-y: auto;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const RightSideWrapper = styled.div`
   width: 100%;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Body = () => {

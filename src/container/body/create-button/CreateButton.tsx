@@ -23,6 +23,7 @@ const StyledButton = styled.button`
   font-weight: 500;
   outline: none;
   transition: all 0.2s;
+  align-self: center;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
 
@@ -41,6 +42,10 @@ const StyledButton = styled.button`
     width: 23px;
     margin-right: 10px;
     color: #182659;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
   }
 `;
 
