@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 import { EventData, EventVars, PAST_EVENTS } from "../past-events/query";
 import { useQuery } from "@apollo/react-hooks";
-import EventRating from "./EventRating";
+import EventReview from "./EventReview";
 import { Event } from "models";
 import { Loader } from "global-components";
 
@@ -48,10 +48,10 @@ const PastEvents = ({ onEventClick }: OwnProps) => {
 
   const events = useMemo(
     () =>
-      data?.events.map(e => (
+      (data?.events || []).reverse().map(e => (
         <StyledItem key={e.id} onClick={() => onEventClick(e)}>
           {e.name}
-          <EventRating ratings={e.ratings} />
+          <EventReview reviews={e.reviews} />
         </StyledItem>
       )),
     [data, onEventClick]

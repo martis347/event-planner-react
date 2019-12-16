@@ -9,6 +9,7 @@ interface OwnProps {
   value: string;
   style?: React.CSSProperties;
   className?: string;
+  onEnter?: () => void;
   onChange: (value: string) => void;
 }
 
@@ -37,7 +38,7 @@ const StyledInput = styled.input`
   }
 
   &:focus {
-    border-bottom: 2px solid #4260cc;
+    border-bottom: 2px solid #4260cc !important;
   }
 
   &:disabled {
@@ -57,7 +58,8 @@ const Input = ({
   disabled,
   style,
   className,
-  onChange
+  onChange,
+  onEnter
 }: OwnProps) => {
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,6 +67,15 @@ const Input = ({
       onChange(eventValue);
     },
     [onChange]
+  );
+
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.ctrlKey && event.key === "Enter") {
+        onEnter?.();
+      }
+    },
+    [onEnter]
   );
 
   return (
@@ -76,6 +87,7 @@ const Input = ({
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
     </InputWrapper>
   );

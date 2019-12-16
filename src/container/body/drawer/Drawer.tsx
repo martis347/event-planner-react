@@ -9,9 +9,10 @@ import styled from "styled-components";
 import { Input, TextArea, DateTimeRange, Button } from "global-components";
 import { MapMarker, AlignLeft, Clock, Text } from "icons/regular";
 import DrawerHeader from "./DrawerHeader";
-import { parseISO } from "date-fns";
+import { parseISO, isPast } from "date-fns";
 import { Event } from "models";
 import { AuthenticationContext } from "context/AuthenticationContext";
+import DrawerReviews from "./reviews/DrawerReviews";
 
 interface OwnProps {
   event?: Event;
@@ -22,10 +23,13 @@ interface OwnProps {
 }
 
 const DrawerWrapper = styled.div<{ visible: number }>`
-  height: 100%;
+  width: 550px;
+  max-width: 550px;
   position: absolute;
   background: white;
   transition: 0.3s right;
+  height: auto;
+  min-height: 100%;
 
   ${props => (props.visible ? "right: 0px;" : "right: -400px;")}
 `;
@@ -69,6 +73,7 @@ const Drawer = ({
   onSave,
   onDelete
 }: OwnProps) => {
+  const { user } = useContext(AuthenticationContext);
   const [drawerVisible, setDrawerVisible] = useState(!!event);
   const [hasError, setHasError] = useState(false);
   const [eventName, setEventName] = useState(event?.name ?? "");
@@ -108,7 +113,7 @@ const Drawer = ({
       description,
       name: eventName,
       location,
-      ratings: [],
+      reviews: [],
       startTime: fromDate ? fromDate.toISOString() : undefined,
       endTime: toDate ? toDate.toISOString() : undefined
     });
@@ -168,11 +173,16 @@ const Drawer = ({
     showAdminContent
   ]);
 
+  const showReviews = useMemo(
+    () => event?.id && isPast(parseISO(event.startTime!)) && user,
+    [event, user]
+  );
+
   return (
-    <DrawerMask visible={drawerVisible ? 1 : 0} onClick={onClose}>
+    <DrawerMask visible={drawerVisible ? 1 : 0} onMouseDown={onClose}>
       <DrawerWrapper
         visible={drawerVisible ? 1 : 0}
-        onClick={handleDrawerClick}
+        onMouseDown={handleDrawerClick}
       >
         <DrawerHeader onClose={onClose}>{title}</DrawerHeader>
         <DrawerContentWrapper>
@@ -209,6 +219,7 @@ const Drawer = ({
           />
           {buttomButtons}
         </DrawerContentWrapper>
+        {showReviews && <DrawerReviews eventId={event!.id} />}
       </DrawerWrapper>
     </DrawerMask>
   );

@@ -54,9 +54,11 @@ const Header = () => {
   ] = React.useState<Element | null>();
 
   const handleSignIn = useCallback(() => {
-    signIn(username);
-    setSignInPopoverAnchor(null);
-    setUsername("");
+    if (username) {
+      signIn(username);
+      setSignInPopoverAnchor(null);
+      setUsername("");
+    }
   }, [signIn, username]);
 
   const userContent = useMemo(() => {
@@ -98,6 +100,7 @@ const Header = () => {
               value={username}
               style={{ marginRight: 16 }}
               onChange={setUsername}
+              onEnter={handleSignIn}
             />
             <Button disabled={!username} onClick={handleSignIn}>
               Sign in

@@ -6,13 +6,13 @@ export interface Event {
   startTime?: string;
   endTime?: string;
   canBeRated: boolean;
-  ratings: EventRating[];
+  reviews: EventReview[];
 }
 
-export interface EventRating {
+export interface EventReview {
   id: string;
   rating: number;
-  comment?: string;
+  comment: string;
   event: Event;
   user: User;
 }

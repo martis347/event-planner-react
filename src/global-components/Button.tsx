@@ -22,7 +22,7 @@ const StyledButton = styled.button<{ isDisabled?: number }>`
 
   ${props => {
     if (props.isDisabled) {
-      return "background: gray !important;";
+      return "background: lightgray !important; cursor: no-drop !important;";
     }
 
     return `
@@ -59,6 +59,7 @@ const Button = ({
     <StyledButton
       style={style}
       className={className}
+      disabled={disabled}
       isDisabled={disabled ? 1 : 0}
       onClick={handleClick}
     >

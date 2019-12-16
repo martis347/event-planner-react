@@ -27,14 +27,13 @@ const BodyWrapper = styled.div`
 
 const LeftSideWrapper = styled(PerfectScrollbar)`
   min-width: 250px;
-  height: 100%;
+  height: auto;
   padding: 12px;
   overflow-y: auto;
 `;
 
 const RightSideWrapper = styled.div`
   width: 100%;
-  height: 100%;
 `;
 
 const Body = () => {
@@ -66,10 +65,10 @@ const Body = () => {
       id: "",
       location: "",
       name: "",
-      startTime: initialDate?.toISOString() ?? undefined,
+      startTime: initialDate?.toISOString?.() ?? undefined,
       endTime: undefined,
       canBeRated: false,
-      ratings: []
+      reviews: []
     });
   }, []);
 

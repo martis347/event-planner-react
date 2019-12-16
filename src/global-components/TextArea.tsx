@@ -8,6 +8,7 @@ interface OwnProps {
   icon?: React.ReactElement;
   placeholder?: string;
   value: string;
+  onEnter?: () => void;
   onChange: (value: string) => void;
 }
 
@@ -35,7 +36,7 @@ const StyledArea = styled.textarea`
   }
 
   &:focus {
-    border-bottom: 2px solid #4260cc;
+    border-bottom: 2px solid #4260cc !important;
   }
 
   &:disabled {
@@ -54,7 +55,8 @@ const TextArea = ({
   placeholder,
   icon,
   rows = 1,
-  onChange
+  onChange,
+  onEnter
 }: OwnProps) => {
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -62,6 +64,15 @@ const TextArea = ({
       onChange(eventValue);
     },
     [onChange]
+  );
+
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (event.ctrlKey && event.key === "Enter") {
+        onEnter?.();
+      }
+    },
+    [onEnter]
   );
 
   return (
@@ -74,6 +85,7 @@ const TextArea = ({
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
     </InputWrapper>
   );

@@ -10,7 +10,7 @@ export const PAST_EVENTS = gql`
       description
       endTime
       location
-      ratings {
+      reviews {
         rating
       }
     }

@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { KeyboardDateTimePicker } from "@material-ui/pickers";
 import styled from "styled-components";
-import { isValid } from "date-fns";
+import { isValid, isBefore } from "date-fns";
 
 interface OwnProps {
   disabled?: boolean;
@@ -23,6 +23,10 @@ const InputWrapper = styled.span`
 
   .MuiInput-underline:hover:not(.Mui-disabled):before {
     border-bottom: 2px solid #c4c4c5;
+  }
+
+  .MuiInput-underline.Mui-disabled:before {
+    border-bottom-style: solid;
   }
 
   .MuiInput-underline:before {
@@ -52,11 +56,11 @@ const DateTimeRange = ({
   const handleFromChange = useCallback(
     (date: Date | null) => {
       onFromChange(date);
-      if (isValid(date)) {
+      if (isValid(date) && toDate && isBefore(toDate, date!)) {
         onToChange(date);
       }
     },
-    [onToChange, onFromChange]
+    [onFromChange, toDate, onToChange]
   );
 
   const handleError = useCallback(
