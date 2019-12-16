@@ -113,7 +113,7 @@ const Header = () => {
 
   return (
     <StyledWrapper>
-      <img src="/logo.svg" alt="Hyarchis logo" />
+      <img src="logo.svg" alt="Hyarchis logo" />
       {userContent}
     </StyledWrapper>
   );

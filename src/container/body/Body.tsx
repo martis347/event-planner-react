@@ -103,11 +103,7 @@ const Body = () => {
         refetchQueries: ["upcomingEvents", "pastEvents"]
       });
 
-      if (result.errors?.length) {
-        console.log("error");
-      } else {
-        handleEdit(undefined);
-      }
+      handleEdit(undefined);
     },
     [deleteEvent, handleEdit]
   );
@@ -144,11 +140,7 @@ const Body = () => {
         });
       }
 
-      if (result.errors?.length) {
-        console.log("error");
-      } else {
-        handleEdit(undefined);
-      }
+      handleEdit(undefined);
     },
     [createEvent, handleEdit, updateEvent]
   );

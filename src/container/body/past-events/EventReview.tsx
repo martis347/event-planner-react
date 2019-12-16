@@ -72,7 +72,6 @@ const EventReviewComponent = ({ reviews }: OwnProps) => {
     return <NoReviewsText>No reviews yet</NoReviewsText>;
   }
 
-  console.log(averageRating);
   return (
     <ReviewWrapper>
       <span>
