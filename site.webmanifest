@@ -15,7 +15,7 @@
   ],
   "theme_color": "#182659",
   "background_color": "#182659",
-  "start_url": "/",
+  "start_url": "/event-planner-react",
   "display": "standalone",
   "orientation": "portrait"
 }
