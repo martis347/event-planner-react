@@ -13,6 +13,15 @@ const NoReviewsText = styled.span`
   color: gray;
 `;
 
+const GoldStarWrapper = styled.span`
+  position: absolute;
+  color: #ffd700;
+  overflow: hidden;
+  left: 0;
+  height: 14px;
+  top: -0.5px;
+`;
+
 const solidStar = <StarSolid style={{ color: "#FFD700" }} />;
 const star = (averageValue: number, index: number) => {
   const fraction = averageValue > index ? averageValue % index : 0;
@@ -25,19 +34,9 @@ const star = (averageValue: number, index: number) => {
           opacity: 0.4
         }}
       />
-      <span
-        style={{
-          position: "absolute",
-          color: "#FFD700",
-          overflowX: "hidden",
-          maxWidth: 14 * fraction,
-          left: 0,
-          height: 14,
-          top: -0.5
-        }}
-      >
+      <GoldStarWrapper style={{ maxWidth: 14 * fraction }}>
         <StarSolid style={{ color: "#FFD700" }} />
-      </span>
+      </GoldStarWrapper>
     </div>
   );
 };
